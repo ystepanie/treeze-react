@@ -1,0 +1,9 @@
+{
+  "server": {
+    "baseDir": "src",
+    "routes": {
+      "/": "src/treeze_basic.html"
+    }
+  }
+}
+  
