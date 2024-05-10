@@ -18,7 +18,25 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'] // Babel 프리셋 설정
           }
         }
+      },
+      {
+        test: /\.(css|scss)$/i,
+        use: ["style-loader", "css-loader"],
+        include: [path.resolve(__dirname, "src/style")],
+      },
+      {
+        test: /\.(png|jp(e*)g)$/,
+        loader: 'url-loader',
+        options: { 
+            limit: 8000,
+            name: 'images/[hash]-[name].[ext]'
+        } 
+      },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader'
       }
+      
     ]
   },
   plugins: [
