@@ -5,7 +5,9 @@ module.exports = {
   entry: './src/index.js', // 애플리케이션 진입점
   output: {
     path: path.resolve(__dirname, 'dist'), // 번들의 출력 경로
-    filename: 'bundle.js' // 출력 파일 이름
+    filename: 'bundle.js', // 출력 파일 이름
+    clean: true,
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -20,23 +22,21 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|scss)$/i,
+        test: /\.(css|scss)$/,
         use: ["style-loader", "css-loader"],
-        include: [path.resolve(__dirname, "src/style")],
-      },
-      {
-        test: /\.(png|jp(e*)g)$/,
-        loader: 'url-loader',
-        options: { 
-            limit: 8000,
-            name: 'images/[hash]-[name].[ext]'
-        } 
-      },
-      {
-        test: /\.svg$/,
-        loader: 'file-loader'
       }
-      
+      // {
+      //   test: /\.(png|jpe?g|gif|svg)$/i,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 10000,
+      //         name: 'assets/[name].[ext]'
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
   plugins: [
@@ -49,7 +49,7 @@ module.exports = {
   },
   devServer: {
     static: path.join(__dirname, 'dist'), // 개발 서버의 콘텐츠 경로
-    compress: true,
+    compress: true, 
     port: 9000 // 서버 포트
   }
 };

@@ -1,25 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import logo from './logo.svg';
-import './style/App.css';
+import ImageSection from './pages/ImageSection';
+import LoginForm from './pages/LoginForm';
+import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="main-content">
+        <ImageSection />
+        <div className="login-form-container">
+          <LoginForm />
+        </div>
+      </div>
     </div>
   );
 }
