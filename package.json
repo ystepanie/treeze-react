@@ -12,10 +12,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "webpack serve --mode=production",
-    "start:dev": "webpack serve --mode=development",
-    "build": "webpack --mode=production",
-    "build:dev": "webpack --mode=production",
+    "build": "webpack",
+    "dev": "webpack-dev-server --mode development",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -23,18 +21,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {
