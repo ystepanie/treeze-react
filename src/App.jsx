@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import ImageSection from './pages/ImageSection';
-import LoginForm from './pages/LoginForm';
 import './styles/App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Signup from './Signup';
+import Login from './Login';
+
+
 
 class App extends Component {
   render() {
     return ( 
+      <Router>
       <div className="App">
-        <div className="main-content">
-          <ImageSection />
-          <div className="login-form-container">
-            <LoginForm />
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
       </div>
+    </Router>
     );
   };  
 }

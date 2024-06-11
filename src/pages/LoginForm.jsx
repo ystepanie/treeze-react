@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/LoginForm.css';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm() {
@@ -41,6 +42,7 @@ function LoginForm() {
         <button type="submit">Login</button>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
+      <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
     </div>
   );
 }
