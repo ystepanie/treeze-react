@@ -9,11 +9,6 @@
   flex: 1;
 }
 
-.image-section {
-  flex: 1;
-  background-color: #f0f0f0;
-}
-
 .login-form-container {
   flex: 1;
   display: flex;

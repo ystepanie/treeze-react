@@ -12,7 +12,7 @@ function SignupForm() {
     
     const signupUser = async (event) => {
         event.preventDefault();
-    
+        
         try {
           const response = await axios.post(API_URL, {
             userId,
@@ -22,7 +22,6 @@ function SignupForm() {
           });
     
           // 회원가입 성공 처리
-          console.log('Signup successful:', response.data);
         } catch (error) {
           console.error('Signup failed:', error.response.data.errorMessage);
           setErrorMessage(error.response.data.errorMessage);

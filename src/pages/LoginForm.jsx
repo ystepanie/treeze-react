@@ -1,30 +1,37 @@
 import React, {useState} from 'react';
 import '../styles/LoginForm.css';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm() {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const API_URL = 'http://127.0.0.1:8181/v1/login/login';
 
-  const loginUser = async (event) => {
-    event.preventDefault();
-
+  const loginUser = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(API_URL, {
         userId,
         userPw
       });
+      console.log("response");
 
+      if(response.data.status == 'success') {
+        // navigate.push('/chanbot');
+      }
       // 로그인 성공 처리
       console.log('Login successful:', response.data);
       // 예: 토큰 저장, 리다이렉션 등
     } catch (error) {
-      console.error('Login failed:', error.response ? error.response.data : error.message);
       setErrorMessage(error.response.data.errorMessage);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -39,7 +46,7 @@ function LoginForm() {
           <label htmlFor="password">Password:</label>
           <input type="password" id="user_password" name="user_password" onChange={(e) => setUserPw(e.target.value)}/>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>Login</button>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
       <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>

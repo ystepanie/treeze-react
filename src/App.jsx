@@ -3,6 +3,7 @@ import './styles/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './Signup';
 import Login from './Login';
+import Chanbot from './Chanbot';
 
 
 
@@ -14,6 +15,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/chanbot" element={<Chanbot />} />
         </Routes>
       </div>
     </Router>
