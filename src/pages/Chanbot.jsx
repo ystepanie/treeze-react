@@ -1,4 +1,4 @@
-import ChanbotForm from "./pages/ChanbotForm";
+import ChanbotForm from "../component/ChanbotForm";
 import React from 'react';
 
 function Chanbot() {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Signup from './Signup';
-import Login from './Login';
-import Chanbot from './Chanbot';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Chanbot from './pages/Chanbot';
 
 
 

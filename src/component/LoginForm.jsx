@@ -12,23 +12,26 @@ function LoginForm() {
 
   const API_URL = 'http://127.0.0.1:8181/v1/login/login';
 
-  const loginUser = async () => {
+  const loginUser = async (event) => {
+    event.preventDefault();
     setIsLoading(true);
-    try {
+    try {   
       const response = await axios.post(API_URL, {
         userId,
         userPw
       });
-      console.log("response");
+      console.log("response status : ", response.data.status);
 
       if(response.data.status == 'success') {
-        // navigate.push('/chanbot');
+        console.log("move Page");
+        navigate('/chanbot');
       }
       // 로그인 성공 처리
       console.log('Login successful:', response.data);
       // 예: 토큰 저장, 리다이렉션 등
     } catch (error) {
-      setErrorMessage(error.response.data.errorMessage);
+      console.error('Signup failed:', error);
+      setErrorMessage(error);
     }
 
     setIsLoading(false);

@@ -1,4 +1,4 @@
-import MessageForm from "/src/pages/MessageForm";
+import MessageForm from "./MessageForm";
 
 function ChanbotForm() {
     return (

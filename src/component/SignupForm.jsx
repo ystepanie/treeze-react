@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function SignupForm() {
@@ -9,6 +9,7 @@ function SignupForm() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const API_URL = 'http://127.0.0.1:8181/v1/login/signup';
+    const navigate = useNavigate();
     
     const signupUser = async (event) => {
         event.preventDefault();
@@ -22,9 +23,13 @@ function SignupForm() {
           });
     
           // 회원가입 성공 처리
+          if(response.data.status == 'success') {
+            console.log("move Page");
+            navigate('/');
+          }
         } catch (error) {
-          console.error('Signup failed:', error.response.data.errorMessage);
-          setErrorMessage(error.response.data.errorMessage);
+          console.error('Signup failed:', error);
+          setErrorMessage(error.response);
         }
       };
 
