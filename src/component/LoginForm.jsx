@@ -12,6 +12,12 @@ function LoginForm() {
 
   const API_URL = 'http://127.0.0.1:8181/v1/login/login';
 
+  // 토큰을 저장하는 함수
+  const saveTokenToLocalStorage = (accessToken, refreshToken) => {
+    localStorage.setItem('accessToken', accessToken); // 로컬 스토리지에 토큰 저장
+    localStorage.setItem('refreshToken', refreshToken);
+  };
+
   const loginUser = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -20,15 +26,23 @@ function LoginForm() {
         userId,
         userPw
       });
-      console.log("response status : ", response.data.status);
+
+      // login success
+      console.log('Login successful:', response.data);
+
+      const data = response.data.data.tokenVo;
+      const accessToken = data.accessToken;
+      const refreshToken = data.refreshToken;
+      
+      // save token to local storage
+      saveTokenToLocalStorage(accessToken, refreshToken);
 
       if(response.data.status == 'success') {
         console.log("move Page");
+        // move to main page
         navigate('/chanbot');
       }
-      // 로그인 성공 처리
-      console.log('Login successful:', response.data);
-      // 예: 토큰 저장, 리다이렉션 등
+
     } catch (error) {
       console.error('Signup failed:', error);
       setErrorMessage(error);
