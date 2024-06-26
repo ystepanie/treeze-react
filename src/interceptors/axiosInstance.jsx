@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // axios 인스턴스 생성
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1',
+    baseURL: 'http://127.0.0.1:8181',
     timeout: 1000, // 요청 타임아웃 설정 (ms)
     headers: { 'Content-Type': 'application/json' },
 });
@@ -11,11 +11,11 @@ const instance = axios.create({
 instance.interceptors.request.use(
     config => {
         // 토큰을 로컬 스토리지에서 가져오기
-        const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
+        const accessToken = localStorage.getItem('x-token');
+        const refreshToken = localStorage.getItem('x-refresh-token');
         if (accessToken && refreshToken) {
-            config.headers.Authorization = `${accessToken}`;
-            config.headers.RefreshToken = `${refreshToken}`;   
+            config.headers['x-token'] = `Bearer ${accessToken}`;
+            config.headers['x-refresh-token'] = `${refreshToken}`;   
         }
         return config;
     },
@@ -32,14 +32,10 @@ instance.interceptors.response.use(
     },
     error => {
         if (error.response && error.response.status === 401) {
-            // 미인증 오류 처리
-            // 로그아웃 처리, 로그인 페이지로 리다이렉트
-            console.error('Unauthorized, logging out ...');
-            // 로그아웃 처리 코드 (예: 토큰 삭제)
             localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            // 로그인 페이지로 리다이렉트
-            navigate('/');
+            // 리프레시 토큰을 조회하여 엑세스 토큰 재발급 처리
+            console.error('Unauthorized, logging out ...');
+            // 리프레시 토큰도 만료일 경우 로그아웃 처리 및 로그인 페이지 이동
         }
         return Promise.reject(error);
     }

@@ -13,9 +13,8 @@ function LoginForm() {
   const API_URL = 'http://127.0.0.1:8181/v1/login/login';
 
   // 토큰을 저장하는 함수
-  const saveTokenToLocalStorage = (accessToken, refreshToken) => {
-    localStorage.setItem('accessToken', accessToken); // 로컬 스토리지에 토큰 저장
-    localStorage.setItem('refreshToken', refreshToken);
+  const saveTokenToLocalStorage = (accessToken) => {
+    localStorage.setItem('x-token', accessToken); // 로컬 스토리지에 토큰 저장
   };
 
   const loginUser = async (event) => {
@@ -32,10 +31,9 @@ function LoginForm() {
 
       const data = response.data.data.tokenVo;
       const accessToken = data.accessToken;
-      const refreshToken = data.refreshToken;
       
       // save token to local storage
-      saveTokenToLocalStorage(accessToken, refreshToken);
+      saveTokenToLocalStorage(accessToken);
 
       if(response.data.status == 'success') {
         console.log("move Page");
@@ -45,7 +43,7 @@ function LoginForm() {
 
     } catch (error) {
       console.error('Signup failed:', error);
-      setErrorMessage(error);
+      setErrorMessage(error.errorMessage);
     }
 
     setIsLoading(false);
